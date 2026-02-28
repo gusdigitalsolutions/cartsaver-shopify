@@ -1,0 +1,27 @@
+name = "cartsaver"
+client_id = "{{ YOUR_SHOPIFY_API_KEY }}"
+application_url = "{{ YOUR_APP_URL }}"
+embedded = true
+
+[access_scopes]
+# Scopes required by CartSaver
+scopes = "read_orders,write_orders,read_products,read_script_tags,write_script_tags,read_customers"
+
+[auth]
+redirect_urls = [
+  "{{ YOUR_APP_URL }}/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-01"
+
+  [[webhooks.subscriptions]]
+  topics = ["app/uninstalled"]
+  uri = "/api/webhooks/app-uninstalled"
+
+  [[webhooks.subscriptions]]
+  topics = ["orders/create"]
+  uri = "/api/webhooks/orders-create"
+
+[pos]
+embedded = false
